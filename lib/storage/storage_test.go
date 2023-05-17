@@ -517,7 +517,7 @@ func testStorageRandTimestamps(s *Storage) error {
 		}
 		for j := 0; j < rowsPerAdd; j++ {
 			mn.MetricGroup = []byte(fmt.Sprintf("metric_%d", rng.Intn(100)))
-			metricNameRaw := mn.marshalRaw(nil)
+			metricNameRaw := mn.MarshalRaw(nil)
 			timestamp := currentTime - int64((rng.Float64()-0.2)*float64(2*s.retentionMsecs))
 			value := rng.NormFloat64() * 1e11
 
@@ -636,7 +636,7 @@ func testStorageDeleteSeries(s *Storage, workerNum int) error {
 			lnsAll[string(mn.Tags[i].Key)] = true
 		}
 		mn.MetricGroup = []byte(fmt.Sprintf("metric_%d_%d", i, workerNum))
-		metricNameRaw := mn.marshalRaw(nil)
+		metricNameRaw := mn.MarshalRaw(nil)
 
 		for j := 0; j < rowsPerMetric; j++ {
 			timestamp := rng.Int63n(1e10)
@@ -815,7 +815,7 @@ func testStorageRegisterMetricNames(s *Storage) error {
 		now := timestampFromTime(time.Now())
 		for j := 0; j < metricsPerAdd; j++ {
 			mn.MetricGroup = []byte(fmt.Sprintf("metric_%d", j))
-			metricNameRaw := mn.marshalRaw(nil)
+			metricNameRaw := mn.MarshalRaw(nil)
 
 			mr := MetricRow{
 				MetricNameRaw: metricNameRaw,
@@ -969,7 +969,7 @@ func testGenerateMetricRows(rng *rand.Rand, rows uint64, timestampMin, timestamp
 	}
 	for i := 0; i < int(rows); i++ {
 		mn.MetricGroup = []byte(fmt.Sprintf("metric_%d", i))
-		metricNameRaw := mn.marshalRaw(nil)
+		metricNameRaw := mn.MarshalRaw(nil)
 		timestamp := rng.Int63n(timestampMax-timestampMin) + timestampMin
 		value := rng.NormFloat64() * 1e6
 
@@ -1121,7 +1121,7 @@ func testStorageAddMetrics(s *Storage, workerNum int) error {
 	}
 	for i := 0; i < rowsCount; i++ {
 		mn.MetricGroup = []byte(fmt.Sprintf("metric_%d_%d", workerNum, rng.Intn(10)))
-		metricNameRaw := mn.marshalRaw(nil)
+		metricNameRaw := mn.MarshalRaw(nil)
 		timestamp := rng.Int63n(1e10)
 		value := rng.NormFloat64() * 1e6
 

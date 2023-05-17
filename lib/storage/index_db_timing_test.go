@@ -91,7 +91,7 @@ func benchmarkIndexDBAddTSIDs(db *indexDB, genTSID *generationTSID, mn *MetricNa
 		}
 		mn.sortTags()
 		metricName = mn.Marshal(metricName[:0])
-		metricNameRaw = mn.marshalRaw(metricNameRaw[:0])
+		metricNameRaw = mn.MarshalRaw(metricNameRaw[:0])
 		if err := is.GetOrCreateTSIDByName(genTSID, metricName, metricNameRaw, 0); err != nil {
 			panic(fmt.Errorf("cannot insert record: %w", err))
 		}
@@ -128,7 +128,7 @@ func BenchmarkHeadPostingForMatchers(b *testing.B) {
 		}
 		mn.sortTags()
 		metricName = mn.Marshal(metricName[:0])
-		metricNameRaw = mn.marshalRaw(metricNameRaw[:0])
+		metricNameRaw = mn.MarshalRaw(metricNameRaw[:0])
 		if err := is.createTSIDByMetricName(&tsid, metricName, metricNameRaw, 0); err != nil {
 			b.Fatalf("cannot insert record: %s", err)
 		}
@@ -311,7 +311,7 @@ func BenchmarkIndexDBGetTSIDs(b *testing.B) {
 	for i := 0; i < recordsCount; i++ {
 		mn.sortTags()
 		metricName = mn.Marshal(metricName[:0])
-		metricNameRaw = mn.marshalRaw(metricName[:0])
+		metricNameRaw = mn.MarshalRaw(metricName[:0])
 		if err := is.GetOrCreateTSIDByName(&genTSID, metricName, metricNameRaw, 0); err != nil {
 			b.Fatalf("cannot insert record: %s", err)
 		}
@@ -331,7 +331,7 @@ func BenchmarkIndexDBGetTSIDs(b *testing.B) {
 			for i := 0; i < recordsPerLoop; i++ {
 				mnLocal.sortTags()
 				metricNameLocal = mnLocal.Marshal(metricNameLocal[:0])
-				metricNameLocalRaw = mnLocal.marshalRaw(metricNameLocalRaw[:0])
+				metricNameLocalRaw = mnLocal.MarshalRaw(metricNameLocalRaw[:0])
 				if err := is.GetOrCreateTSIDByName(&tsidLocal, metricNameLocal, metricNameLocalRaw, 0); err != nil {
 					panic(fmt.Errorf("cannot obtain tsid: %w", err))
 				}

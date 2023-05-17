@@ -99,7 +99,7 @@ func TestSearch(t *testing.T) {
 		mn.MetricGroup = []byte(fmt.Sprintf("metric_%d", i%metricGroupsCount))
 
 		mr := &mrs[i]
-		mr.MetricNameRaw = mn.marshalRaw(nil)
+		mr.MetricNameRaw = mn.MarshalRaw(nil)
 		mr.Timestamp = startTimestamp + int64(i)
 		mr.Value = float64(i)
 
@@ -219,7 +219,7 @@ func testSearchInternal(st *Storage, tr TimeRange, mrs []MetricRow, accountsCoun
 			if err := mn.Unmarshal(mb.MetricName); err != nil {
 				return fmt.Errorf("cannot unmarshal MetricName: %w", err)
 			}
-			metricNameRaw := mn.marshalRaw(nil)
+			metricNameRaw := mn.MarshalRaw(nil)
 			for i, timestamp := range rb.Timestamps {
 				mr := MetricRow{
 					MetricNameRaw: metricNameRaw,

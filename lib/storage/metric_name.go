@@ -575,13 +575,13 @@ func labelsToString(labels []prompb.Label) string {
 	return string(b)
 }
 
-// marshalRaw marshals mn to dst and returns the result.
+// MarshalRaw marshals mn to dst and returns the result.
 //
 // The results may be unmarshaled with MetricName.UnmarshalRaw.
 //
 // This function is for testing purposes. MarshalMetricNameRaw must be used
 // in prod instead.
-func (mn *MetricName) marshalRaw(dst []byte) []byte {
+func (mn *MetricName) MarshalRaw(dst []byte) []byte {
 	dst = marshalBytesFast(dst, nil)
 	dst = marshalBytesFast(dst, mn.MetricGroup)
 

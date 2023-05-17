@@ -42,7 +42,7 @@ func benchmarkStorageAddRows(b *testing.B, rowsPerBatch int) {
 			offset := int(atomic.AddUint64(&globalOffset, uint64(rowsPerBatch)))
 			for i := 0; i < rowsPerBatch; i++ {
 				mr := &mrs[i]
-				mr.MetricNameRaw = mn.marshalRaw(mr.MetricNameRaw[:0])
+				mr.MetricNameRaw = mn.MarshalRaw(mr.MetricNameRaw[:0])
 				mr.Timestamp = int64(offset + i)
 				mr.Value = float64(offset + i)
 			}

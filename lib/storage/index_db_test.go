@@ -654,7 +654,7 @@ func testIndexDBGetOrCreateTSIDByName(db *indexDB, metricGroups int) ([]MetricNa
 		}
 		mn.sortTags()
 		metricNameBuf = mn.Marshal(metricNameBuf[:0])
-		metricNameRawBuf = mn.marshalRaw(metricNameRawBuf[:0])
+		metricNameRawBuf = mn.MarshalRaw(metricNameRawBuf[:0])
 
 		// Create tsid for the metricName.
 		var genTSID generationTSID
@@ -1646,7 +1646,7 @@ func TestSearchTSIDWithTimeRange(t *testing.T) {
 			mn.sortTags()
 
 			metricNameBuf = mn.Marshal(metricNameBuf[:0])
-			metricNameRawBuf = mn.marshalRaw(metricNameRawBuf[:0])
+			metricNameRawBuf = mn.MarshalRaw(metricNameRawBuf[:0])
 			var genTSID generationTSID
 			if err := is.GetOrCreateTSIDByName(&genTSID, metricNameBuf, metricNameRawBuf, 0); err != nil {
 				t.Fatalf("unexpected error when creating tsid for mn:\n%s: %s", &mn, err)
